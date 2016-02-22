@@ -54,3 +54,23 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+@font-face {
+  font-family: 'aller_displayregular';
+  src: url("fonts/allerdisplay.eot");
+  src: url("fonts/allerdisplay.eot?#iefix") format("embedded-opentype"), url("fonts/allerdisplay.woff2") format("woff2"), url("fonts/allerdisplay.woff") format("woff"), url("fonts/allerdisplay.ttf") format("truetype"), url("fonts/allerdisplay.svg#aller_displayregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 1, sass/_main.scss */
+#app {
+  width: 1600px;
+  height: 900px;
+  outline: 3px solid lime;
+}
+
+/* line 7, sass/_main.scss */
+.char {
+  display: inline-block;
+  font-family: 'aller_displayregular';
+}

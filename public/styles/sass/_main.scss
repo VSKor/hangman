@@ -1,0 +1,10 @@
+#app{
+  width: 1600px;
+  height: 900px;
+  outline: 3px solid lime;
+}
+
+.char{
+  display: inline-block;
+  @include aller-display;
+}
