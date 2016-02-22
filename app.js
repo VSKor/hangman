@@ -1,17 +1,26 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser');
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var fs = require("fs");
+var request = require('request');
 var port = 1313;
 
 // Express configuration
 app.use(express.static(__dirname + '/public'));   // set the static files location /public
-app.use(bodyParser.json());                       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({extended: true})); // to support URL-encoded bodies
 
 server.listen(port);
+
+function getWord() {
+  var source = "http://api.wordnik.com/v4/words.json/randomWord?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
+  request.get(source, function (err, data) {
+    if (err) {
+      throw err;
+    }
+    data = JSON.parse(data.body);
+
+    this.emit("newWord", data.word);
+  }.bind(this));
+}
 
 // application -------------------------------------------------------------
 app.get('*', function (req, res) {
@@ -19,9 +28,12 @@ app.get('*', function (req, res) {
 });
 
 io.on('connection', function (socket) {
-  socket.emit("init", true);
+  getWord.call(socket);
 
   socket
+    .on("getWord", function () {
+      getWord.call(this);
+    })
     .on("error", function (err) {
       throw err;
     });
