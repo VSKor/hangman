@@ -1,50 +1,166 @@
+$body-bg: #3b4263;
 $app-bg: #f5f5f5;
 $curtain-bg: rgba(59, 66, 99, 0.74);
 $new-word: #ffba00;
 $scuare: #4d71fa;
-$char-bg: #50525a;
+$char-bg: rgba(80, 82, 90, 0.98);
+$char-bg-disabled: rgba(80, 82, 90, 0.3);
 $txt: #fff;
 $hangman: #53555d;
 
+@mixin char {
+  display: inline-block;
+  text-transform: uppercase;
+  @include aller-display;
+}
+
+body, html {
+  height: 100%;
+}
+
+#wrapper {
+  height: 100%;
+  min-height: 900px;
+  min-width: 1600px;
+  overflow: hidden;
+  width: 100%;
+  background-color: $body-bg;
+}
+
 #app {
+  padding-top: 65px;
   width: 1600px;
-  height: 900px;
-  outline: 3px solid lime;
+  margin: 0 auto;
+  height: 835px;
+  position: relative;
+  background-color: $app-bg;
+
+  & > div {
+    position: relative;
+    z-index: 1;
+  }
+
+  .curtain {
+    background-color: $curtain-bg;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+
+    -webkit-transition: opacity 0.8s, height 0s 0.8s;
+    -moz-transition: opacity 0.8s, height 0s 0.8s;
+    -ms-transition: opacity 0.8s, height 0s 0.8s;
+    -o-transition: opacity 0.8s, height 0s 0.8s;
+    transition: opacity 0.8s, height 0s 0.8s;
+
+    .title{
+      color: white;
+      font-size: 100px;
+      margin-bottom: 45px;
+      text-transform: uppercase;
+    }
+    .reset{
+      border: 4px dashed $new-word;
+      color: $new-word;
+      border-radius: 50px;
+      display: inline-block;
+      font-size: 35px;
+      height: 100px;
+      line-height: 100px;
+      text-transform: uppercase;
+      width: 350px;
+      cursor: pointer;
+    }
+    & > div {
+      height: 260px;
+      margin: -130px auto 0;
+      position: relative;
+      text-align: center;
+      top: 50%;
+      @include aller-display;
+    }
+  }
+
+  .scuare {
+    background-color: $scuare;
+    bottom: 0;
+    height: 1000px;
+    left: 100%;
+    margin-left: -300px;
+    margin-top: -400px;
+    position: absolute;
+    top: 100%;
+    transform: rotate(45deg);
+    width: 1000px;
+    z-index: 0;
+  }
 
   &.playing {
 
   }
+
   &.stopped {
     .curtain {
       opacity: 1;
       height: 100%;
 
-      -webkit-transition: opacity 2s;
-      -moz-transition: opacity 2s;
-      -ms-transition: opacity 2s;
-      -o-transition: opacity 2s;
-      transition: opacity 2s;
+      -webkit-transition: opacity 0.8s;
+      -moz-transition: opacity 0.8s;
+      -ms-transition: opacity 0.8s;
+      -o-transition: opacity 0.8s;
+      transition: opacity 0.8s;
     }
   }
 }
 
-.char {
-  display: inline-block;
-  @include aller-display;
+.success {
+  text-align: center;
+  .char {
+    background-color: $char-bg;
+    border-radius: 10px;
+    color: white;
+    font-size: 80px;
+    height: 140px;
+    line-height: 140px;
+    margin: 0 8px;
+    width: 120px;
+    vertical-align: top;
+    @include char;
+
+    &.unknown {
+      color: transparent;
+    }
+    &.disabled {
+      background-color: $char-bg-disabled;
+    }
+  }
 }
 
-path {
-  stroke-width: 1px;
-  stroke: #000000;
-  fill: none;
+.fails {
+  width: 835px;
+  float: right;
+  .title {
+    @include aller-display;
+    color: $hangman;
+    font-size: 50px;
+    text-transform: uppercase;
+  }
+  .char {
+    color: $scuare;
+    font-size: 100px;
+    margin: 0 5px;
+    @include char;
+  }
 }
 
 svg {
   width: 400px;
   height: 650px;
-}
 
-g {
   path {
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
@@ -52,9 +168,8 @@ g {
     fill: transparent;
     stroke: #000000;
     transition: stroke-dashoffset 3s linear 0s, fill .5s 1.2s, stroke .5s 1.5s;
-
   }
-  &.painted {
+  .painted {
     path {
       stroke: transparent;
       stroke-dashoffset: 0;
@@ -107,29 +222,5 @@ g {
   }
 }
 
-.curtain {
-  background-color: $curtain-bg;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 999;
-  opacity: 0;
-  height: 0;
-  overflow: hidden;
 
-  -webkit-transition: opacity 2s, height 0s 2s;
-  -moz-transition: opacity 2s, height 0s 2s;
-  -ms-transition: opacity 2s, height 0s 2s;
-  -o-transition: opacity 2s, height 0s 2s;
-  transition: opacity 2s, height 0s 2s;
 
-  & > div {
-    height: 200px;
-    margin: -100px auto 0;
-    position: relative;
-    text-align: center;
-    top: 50%;
-    width: 320px;
-  }
-}

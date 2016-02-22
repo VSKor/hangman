@@ -1,11 +1,49 @@
 var App = React.createClass({
   getInitialState: function () {
-    return {
+    var _this = this;
+    var state = {
       word: "",
       success: [],
       fails: [],
       game: false
     };
+
+    Object.defineProperty(state.success, "rule", {
+      enumerable: false,
+      get: function(){
+        return new RegExp("[^- " + this.join("") + "]", "g");
+      }
+    });
+
+    Object.defineProperty(state.success, "content", {
+      enumerable: false,
+      get: function(){
+        var word = _this.state.word;
+        var success = [];
+        var known = word.replace(this.rule, "_");
+            known = Array(12 - word.length).join(" ") + known;
+
+        for (var i in known) {
+          var char = known[i];
+          var classes = "char ";
+          classes += this.indexOf(char) >= 0 ? "known" : char === "_" ? "unknown" : "disabled";
+
+          success[i] = <div className={classes}>{char}</div>;
+        }
+        return success;
+      }
+    });
+
+    Object.defineProperty(state.fails, "content", {
+      enumerable: false,
+      get: function(){
+        return this.map(function (char) {
+          return <div className="char">{char}</div>;
+        });
+      }
+    });
+
+    return state;
   },
   componentDidMount: function () {
     document.addEventListener("keydown", this.handleKeydown);
@@ -52,42 +90,28 @@ var App = React.createClass({
     this.checkStatus();
   },
   checkStatus: function () {
+    //console.log(this.state.success);
+    //console.log(this.state.success.length);
+    //console.log(this.state.word);
+    //console.log(this.state.word.length);
+
     if (this.state.success.length === this.state.word.length ||
       this.state.fails.length === this.refs.scene.state.layers.length) {
       this.setState({game: false});
     }
   },
   render: function () {
-    var fails = this.state.fails.map(function (char) {
-      return <div className="char">{char}</div>;
-    });
-
-    var success = [];
-    var rule = new RegExp("[^- " + this.state.success.join("") + "]", "g");
-    var known = this.state.word.replace(rule, "_");
-    for (var i in known) {
-      var char = known[i];
-      var classes = "char ";
-          classes += this.state.success.indexOf(char) >= 0 ? "known" : char === "_" ? "unknown" : "symbol";
-      success[i] = <div className={classes}>{char}</div>;
-    }
-
     return <div id="app" className={this.state.game ? "playing" : "stopped"}>
-      <div>
-        {this.state.word}
-        <div onClick={this.getWord}>Reset</div>
-      </div>
-
       <div className="fails">
         <div className="title">You missed:</div>
-        <div className="chars">{fails}</div>
-      </div>
-
-      <div className="success">
-        <div className="chars">{success}</div>
+        <div className="chars">{this.state.fails.content}</div>
       </div>
 
       <Scene ref="scene"/>
+
+      <div className="success">
+        <div className="chars">{this.state.success.content}</div>
+      </div>
 
       <div className="curtain">
         <div>
@@ -95,6 +119,8 @@ var App = React.createClass({
           <div className="reset" onClick={this.getWord}>New word</div>
         </div>
       </div>
+
+      <div className="scuare"></div>
     </div>;
   }
 });
@@ -292,4 +318,4 @@ var Layer = React.createClass({
   }
 });
 
-React.render(<App />, document.body);
+React.render(<App />, document.getElementById("wrapper"));
