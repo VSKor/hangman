@@ -62,15 +62,135 @@ table {
   font-weight: normal;
   font-style: normal;
 }
-/* line 1, sass/_main.scss */
+/* line 9, sass/_main.scss */
 #app {
   width: 1600px;
   height: 900px;
   outline: 3px solid lime;
 }
+/* line 18, sass/_main.scss */
+#app.stopped .curtain {
+  opacity: 1;
+  height: 100%;
+  -webkit-transition: opacity 2s;
+  -moz-transition: opacity 2s;
+  -ms-transition: opacity 2s;
+  -o-transition: opacity 2s;
+  transition: opacity 2s;
+}
 
-/* line 7, sass/_main.scss */
+/* line 31, sass/_main.scss */
 .char {
   display: inline-block;
   font-family: 'aller_displayregular';
+}
+
+/* line 36, sass/_main.scss */
+path {
+  stroke-width: 1px;
+  stroke: #000000;
+  fill: none;
+}
+
+/* line 42, sass/_main.scss */
+svg {
+  width: 400px;
+  height: 650px;
+}
+
+/* line 48, sass/_main.scss */
+g path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  stroke-width: 1px;
+  fill: transparent;
+  stroke: #000000;
+  transition: stroke-dashoffset 3s linear 0s, fill .5s 1.2s, stroke .5s 1.5s;
+}
+/* line 58, sass/_main.scss */
+g.painted path {
+  stroke: transparent;
+  stroke-dashoffset: 0;
+}
+/* line 63, sass/_main.scss */
+g.painted .hangman {
+  fill: #53555d;
+}
+/* line 66, sass/_main.scss */
+g.painted .skull,
+g.painted .neck,
+g.painted .left-hand,
+g.painted .right-hand,
+g.painted .left-foot,
+g.painted .right-foot {
+  fill: #f1cc8d;
+}
+/* line 74, sass/_main.scss */
+g.painted .ears {
+  fill: #ffba6c;
+}
+/* line 77, sass/_main.scss */
+g.painted .eyes {
+  fill: #3e3e3f;
+}
+/* line 80, sass/_main.scss */
+g.painted .mouth {
+  fill: #ffffff;
+}
+/* line 83, sass/_main.scss */
+g.painted .deco {
+  fill: #8c97a5;
+}
+/* line 86, sass/_main.scss */
+g.painted .hair {
+  fill: #ecc48f;
+}
+/* line 89, sass/_main.scss */
+g.painted .corpus-left,
+g.painted .left-arm {
+  fill: #9ac25f;
+}
+/* line 93, sass/_main.scss */
+g.painted .corpus-pants,
+g.painted .left-leg,
+g.painted .right-leg {
+  fill: #485c90;
+}
+/* line 98, sass/_main.scss */
+g.painted .corpus-right,
+g.painted .right-arm {
+  fill: #6a9c6d;
+}
+/* line 102, sass/_main.scss */
+g.painted .scar {
+  fill: none;
+  stroke: #ffba6c;
+  stroke-width: 3px;
+}
+
+/* line 110, sass/_main.scss */
+.curtain {
+  background-color: rgba(59, 66, 99, 0.74);
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: opacity 2s, height 0s 2s;
+  -moz-transition: opacity 2s, height 0s 2s;
+  -ms-transition: opacity 2s, height 0s 2s;
+  -o-transition: opacity 2s, height 0s 2s;
+  transition: opacity 2s, height 0s 2s;
+}
+/* line 127, sass/_main.scss */
+.curtain > div {
+  height: 200px;
+  margin: -100px auto 0;
+  position: relative;
+  text-align: center;
+  top: 50%;
+  width: 320px;
 }
