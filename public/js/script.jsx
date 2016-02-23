@@ -10,14 +10,14 @@ var App = React.createClass({
 
     Object.defineProperty(state.success, "rule", {
       enumerable: false,
-      get: function(){
+      get: function () {
         return new RegExp("[^- " + this.join("") + "]", "g");
       }
     });
 
     Object.defineProperty(state.success, "content", {
       enumerable: false,
-      get: function(){
+      get: function () {
         var word = _this.state.word;
         var success = [];
         var known = word.replace(this.rule, "_");
@@ -36,7 +36,7 @@ var App = React.createClass({
 
     Object.defineProperty(state.fails, "content", {
       enumerable: false,
-      get: function(){
+      get: function () {
         return this.map(function (char) {
           return <div className="char">{char}</div>;
         });
@@ -47,7 +47,9 @@ var App = React.createClass({
   },
   componentDidMount: function () {
     document.addEventListener("keydown", this.handleKeydown);
+    window.addEventListener("resize", this.handleResize);
     this.socket.on("newWord", this.setWord);
+    this.handleResize();
   },
   socket: io(),
   getWord: function () {
@@ -60,6 +62,12 @@ var App = React.createClass({
         state.game = true;
 
     this.setState(state);
+  },
+  handleResize: function () {
+    var element = this.getDOMNode();
+    var top = window.innerHeight - element.offsetHeight;
+        top = top > 0 ? top : 0;
+        element.style.top = (top / 2) + "px";
   },
   handleKeydown: function (e) {
     var charCode = e.which || e.keyCode;
@@ -90,12 +98,8 @@ var App = React.createClass({
     this.checkStatus();
   },
   checkStatus: function () {
-    //console.log(this.state.success);
-    //console.log(this.state.success.length);
-    //console.log(this.state.word);
-    //console.log(this.state.word.length);
-
-    if (this.state.success.length === this.state.word.length ||
+    var current = this.state.word.replace(this.state.success.rule, "");
+    if (current.length === this.state.word.length ||
       this.state.fails.length === this.refs.scene.state.layers.length) {
       this.setState({game: false});
     }
