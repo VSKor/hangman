@@ -62,12 +62,12 @@ table {
   font-weight: normal;
   font-style: normal;
 }
-/* line 17, sass/_main.scss */
+/* line 23, sass/_main.scss */
 body, html {
   height: 100%;
 }
 
-/* line 21, sass/_main.scss */
+/* line 27, sass/_main.scss */
 #wrapper {
   height: 100%;
   min-height: 900px;
@@ -77,7 +77,7 @@ body, html {
   background-color: #3b4263;
 }
 
-/* line 30, sass/_main.scss */
+/* line 36, sass/_main.scss */
 #app {
   padding-top: 65px;
   width: 1600px;
@@ -86,12 +86,12 @@ body, html {
   position: relative;
   background-color: #f5f5f5;
 }
-/* line 38, sass/_main.scss */
+/* line 44, sass/_main.scss */
 #app > div {
   position: relative;
   z-index: 1;
 }
-/* line 43, sass/_main.scss */
+/* line 49, sass/_main.scss */
 #app .curtain {
   background-color: rgba(59, 66, 99, 0.74);
   left: 0;
@@ -108,14 +108,14 @@ body, html {
   -o-transition: opacity 0.8s, height 0s 0.8s;
   transition: opacity 0.8s, height 0s 0.8s;
 }
-/* line 60, sass/_main.scss */
+/* line 66, sass/_main.scss */
 #app .curtain .title {
   color: white;
   font-size: 100px;
   margin-bottom: 45px;
   text-transform: uppercase;
 }
-/* line 66, sass/_main.scss */
+/* line 72, sass/_main.scss */
 #app .curtain .reset {
   border: 4px dashed #ffba00;
   color: #ffba00;
@@ -128,7 +128,7 @@ body, html {
   width: 350px;
   cursor: pointer;
 }
-/* line 78, sass/_main.scss */
+/* line 84, sass/_main.scss */
 #app .curtain > div {
   height: 260px;
   margin: -130px auto 0;
@@ -137,7 +137,7 @@ body, html {
   top: 50%;
   font-family: 'aller_displayregular';
 }
-/* line 88, sass/_main.scss */
+/* line 94, sass/_main.scss */
 #app .scuare {
   background-color: #4d71fa;
   bottom: 0;
@@ -151,8 +151,8 @@ body, html {
   width: 1000px;
   z-index: 0;
 }
-/* line 107, sass/_main.scss */
-#app.stopped .curtain {
+/* line 114, sass/_main.scss */
+#app.lose .curtain, #app.win .curtain {
   opacity: 1;
   height: 100%;
   -webkit-transition: opacity 0.8s;
@@ -162,11 +162,11 @@ body, html {
   transition: opacity 0.8s;
 }
 
-/* line 120, sass/_main.scss */
+/* line 127, sass/_main.scss */
 .success {
   text-align: center;
 }
-/* line 122, sass/_main.scss */
+/* line 129, sass/_main.scss */
 .success .char {
   background-color: rgba(80, 82, 90, 0.98);
   border-radius: 10px;
@@ -180,29 +180,39 @@ body, html {
   display: inline-block;
   text-transform: uppercase;
   font-family: 'aller_displayregular';
+  -webkit-transition: color 0.6s, background-color 0.6s;
+  -moz-transition: color 0.6s, background-color 0.6s;
+  -ms-transition: color 0.6s, background-color 0.6s;
+  -o-transition: color 0.6s, background-color 0.6s;
+  transition: color 0.6s, background-color 0.6s;
 }
-/* line 134, sass/_main.scss */
+/* line 141, sass/_main.scss */
 .success .char.unknown {
   color: transparent;
+  -webkit-transition: color 0s 0s, background-color 0.6s 0s;
+  -moz-transition: color 0s 0s, background-color 0.6s 0s;
+  -ms-transition: color 0s 0s, background-color 0.6s 0s;
+  -o-transition: color 0s 0s, background-color 0.6s 0s;
+  transition: color 0s 0s, background-color 0.6s 0s;
 }
-/* line 137, sass/_main.scss */
+/* line 150, sass/_main.scss */
 .success .char.disabled {
   background-color: rgba(80, 82, 90, 0.3);
 }
 
-/* line 143, sass/_main.scss */
+/* line 156, sass/_main.scss */
 .fails {
   width: 835px;
   float: right;
 }
-/* line 146, sass/_main.scss */
+/* line 159, sass/_main.scss */
 .fails .title {
   font-family: 'aller_displayregular';
   color: #53555d;
   font-size: 50px;
   text-transform: uppercase;
 }
-/* line 152, sass/_main.scss */
+/* line 165, sass/_main.scss */
 .fails .char {
   color: #4d71fa;
   font-size: 100px;
@@ -210,32 +220,41 @@ body, html {
   display: inline-block;
   text-transform: uppercase;
   font-family: 'aller_displayregular';
+  -webkit-transition: color 0.6s, background-color 0.6s;
+  -moz-transition: color 0.6s, background-color 0.6s;
+  -ms-transition: color 0.6s, background-color 0.6s;
+  -o-transition: color 0.6s, background-color 0.6s;
+  transition: color 0.6s, background-color 0.6s;
 }
 
-/* line 160, sass/_main.scss */
+/* line 173, sass/_main.scss */
 svg {
   width: 400px;
   height: 650px;
 }
-/* line 164, sass/_main.scss */
+/* line 177, sass/_main.scss */
 svg path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   stroke-width: 1px;
   fill: transparent;
   stroke: #000000;
-  transition: stroke-dashoffset 3s linear 0s, fill .5s 1.2s, stroke .5s 1.5s;
+  -webkit-transition: stroke-dashoffset 3s linear 0s, fill 0.5s 1.2s, stroke 0.5s 1.5s;
+  -moz-transition: stroke-dashoffset 3s linear 0s, fill 0.5s 1.2s, stroke 0.5s 1.5s;
+  -ms-transition: stroke-dashoffset 3s linear 0s, fill 0.5s 1.2s, stroke 0.5s 1.5s;
+  -o-transition: stroke-dashoffset 3s linear 0s, fill 0.5s 1.2s, stroke 0.5s 1.5s;
+  transition: stroke-dashoffset 3s linear 0s, fill 0.5s 1.2s, stroke 0.5s 1.5s;
 }
-/* line 173, sass/_main.scss */
+/* line 191, sass/_main.scss */
 svg .painted path {
   stroke: transparent;
   stroke-dashoffset: 0;
 }
-/* line 178, sass/_main.scss */
+/* line 196, sass/_main.scss */
 svg .painted .hangman {
   fill: #53555d;
 }
-/* line 181, sass/_main.scss */
+/* line 199, sass/_main.scss */
 svg .painted .skull,
 svg .painted .neck,
 svg .painted .left-hand,
@@ -244,43 +263,43 @@ svg .painted .left-foot,
 svg .painted .right-foot {
   fill: #f1cc8d;
 }
-/* line 189, sass/_main.scss */
+/* line 207, sass/_main.scss */
 svg .painted .ears {
   fill: #ffba6c;
 }
-/* line 192, sass/_main.scss */
+/* line 210, sass/_main.scss */
 svg .painted .eyes {
   fill: #3e3e3f;
 }
-/* line 195, sass/_main.scss */
+/* line 213, sass/_main.scss */
 svg .painted .mouth {
   fill: #ffffff;
 }
-/* line 198, sass/_main.scss */
+/* line 216, sass/_main.scss */
 svg .painted .deco {
   fill: #8c97a5;
 }
-/* line 201, sass/_main.scss */
+/* line 219, sass/_main.scss */
 svg .painted .hair {
   fill: #ecc48f;
 }
-/* line 204, sass/_main.scss */
+/* line 222, sass/_main.scss */
 svg .painted .corpus-left,
 svg .painted .left-arm {
   fill: #9ac25f;
 }
-/* line 208, sass/_main.scss */
+/* line 226, sass/_main.scss */
 svg .painted .corpus-pants,
 svg .painted .left-leg,
 svg .painted .right-leg {
   fill: #485c90;
 }
-/* line 213, sass/_main.scss */
+/* line 231, sass/_main.scss */
 svg .painted .corpus-right,
 svg .painted .right-arm {
   fill: #6a9c6d;
 }
-/* line 217, sass/_main.scss */
+/* line 235, sass/_main.scss */
 svg .painted .scar {
   fill: none;
   stroke: #ffba6c;

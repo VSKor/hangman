@@ -5,7 +5,8 @@ var App = React.createClass({
       word: "",
       success: [],
       fails: [],
-      game: false
+      game: false,
+      status: "beginning"
     };
 
     Object.defineProperty(state.success, "rule", {
@@ -99,13 +100,19 @@ var App = React.createClass({
   },
   checkStatus: function () {
     var current = this.state.word.replace(this.state.success.rule, "");
+
     if (current.length === this.state.word.length ||
       this.state.fails.length === this.refs.scene.state.layers.length) {
-      this.setState({game: false});
+      var status = current.length === this.state.word.length ? "win" : "lose";
+
+        this.setState({game: false, status: status});
     }
   },
   render: function () {
-    return <div id="app" className={this.state.game ? "playing" : "stopped"}>
+    var classes = this.state.status;
+        classes += this.state.game ? " playing" : " stopped";
+
+    return <div id="app" className={classes}>
       <div className="fails">
         <div className="title">You missed:</div>
         <div className="chars">{this.state.fails.content}</div>

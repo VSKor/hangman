@@ -12,6 +12,12 @@ $hangman: #53555d;
   display: inline-block;
   text-transform: uppercase;
   @include aller-display;
+
+  -webkit-transition: color 0.6s, background-color 0.6s;
+  -moz-transition: color 0.6s, background-color 0.6s;
+  -ms-transition: color 0.6s, background-color 0.6s;
+  -o-transition: color 0.6s, background-color 0.6s;
+  transition: color 0.6s, background-color 0.6s;
 }
 
 body, html {
@@ -57,13 +63,13 @@ body, html {
     -o-transition: opacity 0.8s, height 0s 0.8s;
     transition: opacity 0.8s, height 0s 0.8s;
 
-    .title{
+    .title {
       color: white;
       font-size: 100px;
       margin-bottom: 45px;
       text-transform: uppercase;
     }
-    .reset{
+    .reset {
       border: 4px dashed $new-word;
       color: $new-word;
       border-radius: 50px;
@@ -103,7 +109,8 @@ body, html {
 
   }
 
-  &.stopped {
+  &.lose,
+  &.win {
     .curtain {
       opacity: 1;
       height: 100%;
@@ -133,6 +140,12 @@ body, html {
 
     &.unknown {
       color: transparent;
+      
+      -webkit-transition: color 0s 0s, background-color 0.6s 0s;
+      -moz-transition: color 0s 0s, background-color 0.6s 0s;
+      -ms-transition: color 0s 0s, background-color 0.6s 0s;
+      -o-transition: color 0s 0s, background-color 0.6s 0s;
+      transition: color 0s 0s, background-color 0.6s 0s;
     }
     &.disabled {
       background-color: $char-bg-disabled;
@@ -167,7 +180,12 @@ svg {
     stroke-width: 1px;
     fill: transparent;
     stroke: #000000;
-    transition: stroke-dashoffset 3s linear 0s, fill .5s 1.2s, stroke .5s 1.5s;
+
+    -webkit-transition: stroke-dashoffset 3s linear 0s, fill 0.5s 1.2s, stroke 0.5s 1.5s;
+    -moz-transition: stroke-dashoffset 3s linear 0s, fill 0.5s 1.2s, stroke 0.5s 1.5s;
+    -ms-transition: stroke-dashoffset 3s linear 0s, fill 0.5s 1.2s, stroke 0.5s 1.5s;
+    -o-transition: stroke-dashoffset 3s linear 0s, fill 0.5s 1.2s, stroke 0.5s 1.5s;
+    transition: stroke-dashoffset 3s linear 0s, fill 0.5s 1.2s, stroke 0.5s 1.5s;
   }
   .painted {
     path {
